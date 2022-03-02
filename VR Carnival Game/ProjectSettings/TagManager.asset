@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Right Hammer
+  - Left Hammer
+  - FxTemporaire
+  - projectile
+  - Hole
+  - Mole
   layers:
   - Default
   - TransparentFX
