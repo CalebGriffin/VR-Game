@@ -4,27 +4,21 @@ using UnityEngine;
 
 public class BlueMole : Mole
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public override void Hit(string hammerName)
     {
         if (hammerName == "Blue Hammer")
         {
+            transform.parent.gameObject.SendMessage("MoleKilled");
             Destroy(this.gameObject);
         }
         else
         {
             // Take points from the player
         }
+    }
+
+    public override void Despawn()
+    {
+        base.Despawn();
     }
 }

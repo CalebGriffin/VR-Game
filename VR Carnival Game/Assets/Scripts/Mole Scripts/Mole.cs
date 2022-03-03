@@ -5,13 +5,13 @@ using UnityEngine;
 public class Mole : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    virtual public void Start()
     {
         
     }
 
     // Update is called once per frame
-    void Update()
+    virtual public void Update()
     {
         
     }
@@ -19,5 +19,11 @@ public class Mole : MonoBehaviour
     virtual public void Hit(string hammerName)
     {
 
+    }
+
+    virtual public void Despawn()
+    {
+        transform.parent.gameObject.SendMessage("MoleKilled");
+        Destroy(this.gameObject);
     }
 }

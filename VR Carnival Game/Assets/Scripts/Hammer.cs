@@ -16,7 +16,7 @@ public class Hammer : MonoBehaviour
         
     }
 
-    void OnTriggerEnter(Collider collider)
+    void OnCollisionEnter(Collision collider)
     {
         if (collider.gameObject.CompareTag("Mole"))
         {

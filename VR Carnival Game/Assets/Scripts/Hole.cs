@@ -7,6 +7,8 @@ public class Hole : MonoBehaviour
     [SerializeField] private GameObject[] moles;
 
     [SerializeField] private float moleHeight = 1f;
+
+    private bool canSpawnMole = true;
     
     //private int molesSpawned = 0;
 
@@ -27,10 +29,43 @@ public class Hole : MonoBehaviour
         int moleIndex = Random.Range(0,2);
         GameObject prefab = GameObject.Instantiate(moles[moleIndex], transform.position + Vector3.up * moleHeight, transform.rotation);
         prefab.transform.parent = this.gameObject.transform;
+        StartCoroutine(MoleTimeout(prefab));
+    }
+
+    public bool CanAMoleSpawn()
+    {
+        if (canSpawnMole)
+        {
+            return !HasMole();
+        }
+        else
+        {
+            return canSpawnMole;
+        }
     }
 
     public bool HasMole()
     {
-        return this.gameObject.transform.childCount > 6;
+        return this.gameObject.transform.childCount > 5;
+    }
+
+    public void MoleKilled()
+    {
+        canSpawnMole = false;
+        StartCoroutine(MoleReset());
+    }
+
+    private IEnumerator MoleReset()
+    {
+        yield return new WaitForSeconds(2f);
+
+        canSpawnMole = true;
+    }
+
+    private IEnumerator MoleTimeout(GameObject mole)
+    {
+        yield return new WaitForSeconds(5f);
+
+        mole.SendMessage("Despawn");
     }
 }

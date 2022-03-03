@@ -28,7 +28,7 @@ public class HoleManager : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
 
         // Generate a random number of moles to spawn based on the size of the holes array
-        int noOfMolesToSpawn = Random.Range(holes.Length / 1, holes.Length / 5);
+        int noOfMolesToSpawn = Random.Range(holes.Length / 2, holes.Length / 5);
         
         for (int i = 0; i < noOfMolesToSpawn; i++)
         {
@@ -38,7 +38,7 @@ public class HoleManager : MonoBehaviour
             {
                 loopCount++;
                 int holeIndex = Random.Range(0, holes.Length);
-                if (holes[holeIndex].GetComponent<Hole>().HasMole() == false)
+                if (holes[holeIndex].GetComponent<Hole>().CanAMoleSpawn() == true)
                 {
                     //holes[holeIndex].SendMessage("SpawnMole");
                     holes[holeIndex].GetComponent<Hole>().SpawnMole();
