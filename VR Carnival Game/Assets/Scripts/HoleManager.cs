@@ -22,13 +22,17 @@ public class HoleManager : MonoBehaviour
     public IEnumerator SpawnMoles()
     {
         // Generate a random amount of time between 2 and 5 seconds
-        int waitTime = Random.Range(2,6);
+        //int waitTime = Random.Range(2,6);
 
         // Wait for that amount of time
-        yield return new WaitForSeconds(waitTime);
+        //yield return new WaitForSeconds(waitTime);
+
+        yield return new WaitForSeconds(0.5f);
 
         // Generate a random number of moles to spawn based on the size of the holes array
-        int noOfMolesToSpawn = Random.Range(holes.Length / 2, holes.Length / 5);
+        //int noOfMolesToSpawn = Random.Range(holes.Length / 2, holes.Length / 5);
+
+        int noOfMolesToSpawn = Random.Range(1,3);
         
         for (int i = 0; i < noOfMolesToSpawn; i++)
         {
