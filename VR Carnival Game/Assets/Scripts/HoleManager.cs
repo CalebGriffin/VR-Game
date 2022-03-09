@@ -42,10 +42,10 @@ public class HoleManager : MonoBehaviour
             {
                 loopCount++;
                 int holeIndex = Random.Range(0, holes.Length);
+                yield return new WaitForSeconds(0.001f);
                 if (holes[holeIndex].GetComponent<Hole>().CanAMoleSpawn() == true)
                 {
-                    //holes[holeIndex].SendMessage("SpawnMole");
-                    holes[holeIndex].GetComponent<Hole>().SpawnMole();
+                    holes[holeIndex].SendMessage("SpawnMole");
                     moleSpawned = true;
                 }
                 

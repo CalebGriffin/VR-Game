@@ -38,6 +38,11 @@ public class Hole : MonoBehaviour
         {
             transform.localPosition = startPos;
         }
+
+        if (this.gameObject.transform.childCount > 6)
+        {
+            Destroy(this.gameObject.transform.GetChild(7).gameObject);
+        }
     }
 
     public void SpawnMole()
@@ -93,6 +98,13 @@ public class Hole : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
 
-        mole.SendMessage("Despawn");
+        try
+        {
+            mole.SendMessage("Despawn");
+        }
+        catch (MissingReferenceException)
+        {
+            // Mole Timed Out
+        }
     }
 }

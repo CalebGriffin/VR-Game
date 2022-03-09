@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ComboBar : MonoBehaviour
 {
@@ -17,7 +18,12 @@ public class ComboBar : MonoBehaviour
 
     private float value = 0f;
 
-    private float decreaseAmount = 5f;
+    private float decreaseAmount = 15f;
+
+    private bool justHit = false;
+
+    [SerializeField] private TextMeshProUGUI comboBarText;
+    [SerializeField] private Slider comboBarSlider;
 
     void Awake()
     {
@@ -42,10 +48,27 @@ public class ComboBar : MonoBehaviour
     void Update()
     {
         value = Mathf.Clamp(value - (decreaseAmount * Time.deltaTime), 0, 100);
+        comboBarSlider.value = value;
+
+        //comboBarText.text = "x" + (int)Mathf.Clamp((value / 20) + 1, 1, 5);
+        comboBarText.text = value.ToString();
     }
 
     public void IncreaseCombo()
     {
-        value = Mathf.Clamp(value + 20, 0, 100);
+        if (!justHit)
+        {
+            value = Mathf.Clamp(value + 10f, 0, 100);
+        }
+
+        justHit = true;
+        StartCoroutine(HitDelay());
+    }
+
+    private IEnumerator HitDelay()
+    {
+        yield return new WaitForSeconds(0.15f);
+        
+        justHit = false;
     }
 }
