@@ -25,6 +25,8 @@ public class ComboBar : MonoBehaviour
     [SerializeField] private TextMeshProUGUI comboBarText;
     [SerializeField] private Slider comboBarSlider;
 
+    [SerializeField] private TextMeshProUGUI scoreText;
+
     void Awake()
     {
         if (instance != null && instance != this)
@@ -49,16 +51,17 @@ public class ComboBar : MonoBehaviour
     {
         value = Mathf.Clamp(value - (decreaseAmount * Time.deltaTime), 0, 100);
         comboBarSlider.value = value;
+        gVar.currentCombo = (int)Mathf.Clamp((value / 20) + 1, 1, 5);
 
-        //comboBarText.text = "x" + (int)Mathf.Clamp((value / 20) + 1, 1, 5);
-        comboBarText.text = value.ToString();
+        comboBarText.text = "x" + gVar.currentCombo.ToString();
+        //comboBarText.text = value.ToString();
     }
 
     public void IncreaseCombo()
     {
         if (!justHit)
         {
-            value = Mathf.Clamp(value + 10f, 0, 100);
+            value = Mathf.Clamp(value + 12f, 0, 100);
         }
 
         justHit = true;
@@ -70,5 +73,15 @@ public class ComboBar : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
         
         justHit = false;
+    }
+
+    public void ResetCombo()
+    {
+        value = 0;
+    }
+
+    public void ScoreTextUpdate()
+    {
+        scoreText.text = gVar.score.ToString();
     }
 }

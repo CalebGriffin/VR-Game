@@ -19,7 +19,23 @@ public class Mole : MonoBehaviour
 
     virtual public void Hit(string hammerName)
     {
+        // This will be overridden by the inherited classes
+    }
 
+    protected void CorrectHit()
+    {
+        transform.parent.gameObject.SendMessage("MoleKilled");
+        gVar.score = (int)Mathf.Clamp(gVar.score + (100 * gVar.currentCombo), 0, Mathf.Infinity);
+        ComboBar.Instance.ScoreTextUpdate();
+        ComboBar.Instance.IncreaseCombo();
+        Destroy(this.gameObject);
+    }
+
+    protected void IncorrectHit()
+    {
+        gVar.score = (int)Mathf.Clamp(gVar.score - 100, 0, Mathf.Infinity);
+        ComboBar.Instance.ScoreTextUpdate();
+        ComboBar.Instance.ResetCombo();
     }
 
     virtual public void Despawn()

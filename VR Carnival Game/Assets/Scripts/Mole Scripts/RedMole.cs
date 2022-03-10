@@ -9,16 +9,17 @@ public class RedMole : Mole
     {
         if (hammerName == "Red Hammer")
         {
-            //transform.parent.gameObject.SendMessage("MoleKilled");
-            transform.parent.gameObject.GetComponent<Hole>().MoleKilled();
             // Vibrate the Controller
-            SteamVR_Actions.default_Haptic[SteamVR_Input_Sources.LeftHand].Execute(0, 0.5f, 100, 1);
-            ComboBar.Instance.IncreaseCombo();
-            Destroy(this.gameObject);
+            SteamVR_Actions.default_Haptic[SteamVR_Input_Sources.LeftHand].Execute(0, 0.15f, 300, 1);
+
+            base.CorrectHit();
         }
-        else
+        else if (hammerName == "Blue Hammer")
         {
-            // Take points from the player
+            // Vibrate the Controller
+            SteamVR_Actions.default_Haptic[SteamVR_Input_Sources.RightHand].Execute(0, 0.5f, 100, 1);
+
+            base.IncorrectHit();
         }
     }
 

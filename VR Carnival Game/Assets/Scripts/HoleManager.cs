@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class HoleManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] holes;
+    private int prevHoleIndex = -1;
 
     // Start is called before the first frame update
     void Start()
     {
-        holes = GameObject.FindGameObjectsWithTag("Hole");
         StartCoroutine(SpawnMoles());
     }
 
@@ -21,39 +20,27 @@ public class HoleManager : MonoBehaviour
 
     public IEnumerator SpawnMoles()
     {
-        // Generate a random amount of time between 2 and 5 seconds
-        //int waitTime = Random.Range(2,6);
-
-        // Wait for that amount of time
-        //yield return new WaitForSeconds(waitTime);
-
         yield return new WaitForSeconds(0.5f);
 
-        // Generate a random number of moles to spawn based on the size of the holes array
-        //int noOfMolesToSpawn = Random.Range(holes.Length / 2, holes.Length / 5);
+        foreach (GameObject obj in gVar.holes)
+        {
+            Debug.Log(obj.name);
+        }
 
         int noOfMolesToSpawn = Random.Range(1,3);
         
         for (int i = 0; i < noOfMolesToSpawn; i++)
         {
-            bool moleSpawned = false;
-            int loopCount = 0;
-            while(!moleSpawned)
+            yield return new WaitForSeconds(0.01f);
+            if (gVar.holes.Count > 0)
             {
-                loopCount++;
-                int holeIndex = Random.Range(0, holes.Length);
-                yield return new WaitForSeconds(0.001f);
-                if (holes[holeIndex].GetComponent<Hole>().CanAMoleSpawn() == true)
+                int holeIndex = Random.Range(0, gVar.holes.Count - 1);
+                Debug.Log(gVar.holes.Count + " " + holeIndex);
+                if (holeIndex != prevHoleIndex)
                 {
-                    holes[holeIndex].SendMessage("SpawnMole");
-                    moleSpawned = true;
+                    gVar.holes[holeIndex].SendMessage("SpawnMole");
                 }
-                
-                if (loopCount >= holes.Length)
-                {
-                    Debug.Log("No Hole Found");
-                    break;
-                }
+                prevHoleIndex = holeIndex;
             }
         }
 

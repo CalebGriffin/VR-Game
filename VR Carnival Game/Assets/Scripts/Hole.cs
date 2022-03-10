@@ -22,6 +22,7 @@ public class Hole : MonoBehaviour
     void Start()
     {
         startPos = transform.localPosition;
+        gVar.holes.Add(this.gameObject);
     }
 
     // Update is called once per frame
@@ -47,8 +48,12 @@ public class Hole : MonoBehaviour
 
     public void SpawnMole()
     {
-        holeAnimating = true;
-        StartCoroutine(SpawnMoleDelay());
+        if (this.gameObject.transform.childCount == 5)
+        {
+            holeAnimating = true;
+            gVar.holes.Remove(this.gameObject);
+            StartCoroutine(SpawnMoleDelay());
+        }
     }
 
     public IEnumerator SpawnMoleDelay()
@@ -84,6 +89,7 @@ public class Hole : MonoBehaviour
     public void MoleKilled()
     {
         canSpawnMole = false;
+        gVar.holes.Remove(this.gameObject);
         StartCoroutine(MoleReset());
     }
 
@@ -92,11 +98,12 @@ public class Hole : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         canSpawnMole = true;
+        gVar.holes.Add(this.gameObject);
     }
 
     private IEnumerator MoleTimeout(GameObject mole)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
 
         try
         {
@@ -104,7 +111,7 @@ public class Hole : MonoBehaviour
         }
         catch (MissingReferenceException)
         {
-            // Mole Timed Out
+            // Mole was hit before timeout
         }
     }
 }
