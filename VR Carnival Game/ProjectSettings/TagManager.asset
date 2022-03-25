@@ -10,6 +10,8 @@ TagManager:
   - projectile
   - Hole
   - Mole
+  - FixedMat
+  - PlayerHead
   layers:
   - Default
   - TransparentFX

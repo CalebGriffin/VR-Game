@@ -5,6 +5,14 @@ using Valve.VR;
 
 public class RedMole : Mole
 {
+    [SerializeField] private Material redMat;
+
+    public override void OnEnable()
+    {
+        base.GetDressed(redMat);
+        base.OnEnable();
+    }
+
     public override void Hit(string hammerName)
     {
         if (hammerName == "Red Hammer")

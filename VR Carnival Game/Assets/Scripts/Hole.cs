@@ -6,7 +6,7 @@ public class Hole : MonoBehaviour
 {
     [SerializeField] private GameObject[] moles;
 
-    [SerializeField] private float moleHeight = 1f;
+    [SerializeField] private float moleHeight = 0.01f;
 
     private bool canSpawnMole = true;
 
@@ -65,7 +65,8 @@ public class Hole : MonoBehaviour
         int moleIndex = Random.Range(0,2);
         GameObject prefab = GameObject.Instantiate(moles[moleIndex], transform.position + transform.up * moleHeight, transform.rotation);
         prefab.transform.parent = this.gameObject.transform;
-        prefab.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        prefab.transform.localScale = Vector3.one;
+        //prefab.SendMessage("OnEnable");
         StartCoroutine(MoleTimeout(prefab));
     }
 
