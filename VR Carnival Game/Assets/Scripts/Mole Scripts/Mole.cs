@@ -12,6 +12,8 @@ public class Mole : MonoBehaviour
 
     [SerializeField] private GameObject playerHead;
 
+    //[SerializeField] protected GameObject deathParticles;
+
     // Start is called before the first frame update
     virtual public void Start()
     {
@@ -28,6 +30,7 @@ public class Mole : MonoBehaviour
     {
         playerHead = GameObject.FindGameObjectWithTag("PlayerHead");
         FaceThePlayer();
+        //DeathParticles();
     }
 
     virtual public void Hit(string hammerName)
@@ -49,6 +52,7 @@ public class Mole : MonoBehaviour
         gVar.score = (int)Mathf.Clamp(gVar.score - 100, 0, Mathf.Infinity);
         ComboBar.Instance.ScoreTextUpdate();
         ComboBar.Instance.ResetCombo();
+        Despawn();
     }
 
     virtual public void Despawn()
@@ -56,6 +60,12 @@ public class Mole : MonoBehaviour
         transform.parent.gameObject.SendMessage("MoleKilled");
         Destroy(this.gameObject);
     }
+
+    //virtual public void DeathParticles()
+    //{
+        //GameObject prefab = GameObject.Instantiate(deathParticles, transform.position, Quaternion.identity);
+        //prefab.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
+    //}
 
     virtual public void GetDressed(Material colouredMat)
     {

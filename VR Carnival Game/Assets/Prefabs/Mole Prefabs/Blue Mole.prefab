@@ -2292,6 +2292,7 @@ MonoBehaviour:
   moustaches:
   - {fileID: 6264032031199745166}
   playerHead: {fileID: 0}
+  deathParticles: {fileID: 8203391896140246126, guid: 9cb1a57fa438907488c62f1f51ddb3eb, type: 3}
   blueMat: {fileID: 2100000, guid: 5651a5b787e5a8640837e1f9c361c74c, type: 2}
 --- !u!1 &6264032032227171081
 GameObject:
