@@ -15,6 +15,8 @@ public class Hole : MonoBehaviour
     private bool holeAnimating;
 
     private int animationPower = 9;
+
+    private bool hasMole = false;
     
     //private int molesSpawned = 0;
 
@@ -39,18 +41,14 @@ public class Hole : MonoBehaviour
         {
             transform.localPosition = startPos;
         }
-
-        if (this.gameObject.transform.childCount > 6)
-        {
-            Destroy(this.gameObject.transform.GetChild(7).gameObject);
-        }
     }
 
     public void SpawnMole()
     {
-        if (this.gameObject.transform.childCount == 5)
+        if (!hasMole)
         {
             holeAnimating = true;
+            hasMole = true;
             gVar.holes.Remove(this.gameObject);
             StartCoroutine(SpawnMoleDelay());
         }
@@ -63,18 +61,20 @@ public class Hole : MonoBehaviour
         holeAnimating = false;
 
         int moleIndex = Random.Range(0,2);
-        GameObject prefab = GameObject.Instantiate(moles[moleIndex], transform.position + transform.up * moleHeight, transform.rotation);
-        prefab.transform.parent = this.gameObject.transform;
-        prefab.transform.localScale = Vector3.one;
+        moles[moleIndex].SetActive(true);
+        hasMole = true;
+        //GameObject prefab = GameObject.Instantiate(moles[moleIndex], transform.position + transform.up * moleHeight, transform.rotation);
+        //prefab.transform.parent = this.gameObject.transform;
+        //prefab.transform.localScale = Vector3.one;
         //prefab.SendMessage("OnEnable");
-        StartCoroutine(MoleTimeout(prefab));
+        StartCoroutine(MoleTimeout(moles[moleIndex]));
     }
 
     public bool CanAMoleSpawn()
     {
         if (canSpawnMole)
         {
-            return !HasMole();
+            return !hasMole;
         }
         else
         {
@@ -82,14 +82,10 @@ public class Hole : MonoBehaviour
         }
     }
 
-    public bool HasMole()
-    {
-        return this.gameObject.transform.childCount > 5;
-    }
-
     public void MoleKilled()
     {
         canSpawnMole = false;
+        hasMole = false;
         gVar.holes.Remove(this.gameObject);
         StartCoroutine(MoleReset());
     }
@@ -99,6 +95,7 @@ public class Hole : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         canSpawnMole = true;
+        hasMole = false;
         gVar.holes.Add(this.gameObject);
     }
 

@@ -33,6 +33,11 @@ public class Mole : MonoBehaviour
         //DeathParticles();
     }
 
+    virtual public void OnDisable()
+    {
+        GetUndressed();
+    }
+
     virtual public void Hit(string hammerName)
     {
         // This will be overridden by the inherited classes
@@ -44,7 +49,7 @@ public class Mole : MonoBehaviour
         gVar.score = (int)Mathf.Clamp(gVar.score + (100 * gVar.currentCombo), 0, Mathf.Infinity);
         ComboBar.Instance.ScoreTextUpdate();
         ComboBar.Instance.IncreaseCombo();
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 
     protected void IncorrectHit()
@@ -58,7 +63,7 @@ public class Mole : MonoBehaviour
     virtual public void Despawn()
     {
         transform.parent.gameObject.SendMessage("MoleKilled");
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 
     //virtual public void DeathParticles()
@@ -73,6 +78,22 @@ public class Mole : MonoBehaviour
         ItemPicker(glasses, false, colouredMat);
         ItemPicker(neckAccessories, false, colouredMat);
         ItemPicker(moustaches, false, colouredMat);
+    }
+
+    virtual public void GetUndressed()
+    {
+        ItemHider(hats);
+        ItemHider(glasses);
+        ItemHider(neckAccessories);
+        ItemHider(moustaches);
+    }
+
+    virtual protected void ItemHider(GameObject[] accessoryArray)
+    {
+        foreach (GameObject go in accessoryArray)
+        {
+            go.SetActive(false);
+        }
     }
 
     virtual protected void ItemPicker(GameObject[] accessoryArray, bool isHats, Material colouredMat)

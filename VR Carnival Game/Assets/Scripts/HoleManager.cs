@@ -34,7 +34,7 @@ public class HoleManager : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
             if (gVar.holes.Count > 0)
             {
-                int holeIndex = Random.Range(0, gVar.holes.Count - 1);
+                int holeIndex = Random.Range(0, gVar.holes.Count);
                 Debug.Log(gVar.holes.Count + " " + holeIndex);
                 if (holeIndex != prevHoleIndex)
                 {
