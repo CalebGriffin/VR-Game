@@ -12,6 +12,8 @@ TagManager:
   - Mole
   - FixedMat
   - PlayerHead
+  - SpecialColliders
+  - InnerSphere
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - Hammer
   - Water
   - UI
-  - 
+  - SpecialColliders
   - 
   - 
   - 

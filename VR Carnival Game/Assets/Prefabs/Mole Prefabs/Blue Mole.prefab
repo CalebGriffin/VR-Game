@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 4817704313789466587}
   m_Layer: 0
   m_Name: Cylinder.005
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -669,7 +669,7 @@ GameObject:
   - component: {fileID: 3289153576669331734}
   m_Layer: 0
   m_Name: Cylinder.001
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -878,7 +878,7 @@ GameObject:
   - component: {fileID: 1162686519554134426}
   m_Layer: 0
   m_Name: Whisker Parent
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -911,10 +911,9 @@ GameObject:
   - component: {fileID: 5935062638342714627}
   - component: {fileID: 4531441856461608427}
   - component: {fileID: 6872630311977707173}
-  - component: {fileID: 5820033839703632054}
   m_Layer: 0
   m_Name: Mole Body
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -983,20 +982,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5820033839703632054
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2582068617365370587}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.059621718
-  m_Height: 0.24
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2591890493574832464
 GameObject:
   m_ObjectHideFlags: 0
@@ -1090,7 +1075,7 @@ GameObject:
   - component: {fileID: 115997246685556647}
   m_Layer: 0
   m_Name: Origin
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1451,7 +1436,7 @@ GameObject:
   - component: {fileID: 7891951789875445480}
   m_Layer: 0
   m_Name: Pupil
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1533,7 +1518,7 @@ GameObject:
   - component: {fileID: 5923239321614009134}
   m_Layer: 0
   m_Name: Cylinder.002
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1615,7 +1600,7 @@ GameObject:
   - component: {fileID: 8199136598204209718}
   m_Layer: 0
   m_Name: Right Eye
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2240,9 +2225,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6747974839852948224}
   - component: {fileID: 6264032031580422587}
+  - component: {fileID: 564316049178763111}
   m_Layer: 0
   m_Name: Blue Mole
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2292,8 +2278,21 @@ MonoBehaviour:
   moustaches:
   - {fileID: 6264032031199745166}
   playerHead: {fileID: 0}
-  deathParticles: {fileID: 8203391896140246126, guid: 9cb1a57fa438907488c62f1f51ddb3eb, type: 3}
   blueMat: {fileID: 2100000, guid: 5651a5b787e5a8640837e1f9c361c74c, type: 2}
+--- !u!136 &564316049178763111
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6264032031580422586}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.059621718
+  m_Height: 0.23
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6264032032227171081
 GameObject:
   m_ObjectHideFlags: 0
@@ -2451,7 +2450,7 @@ GameObject:
   - component: {fileID: 250291254564043852}
   m_Layer: 0
   m_Name: Tooth.001
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2597,7 +2596,7 @@ GameObject:
   - component: {fileID: 6498454708091423629}
   m_Layer: 0
   m_Name: Mole Parts
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2670,7 +2669,7 @@ GameObject:
   - component: {fileID: 1772989796669982922}
   m_Layer: 0
   m_Name: Eyelid
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2752,7 +2751,7 @@ GameObject:
   - component: {fileID: 8428926412055900534}
   m_Layer: 0
   m_Name: Nose
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2834,7 +2833,7 @@ GameObject:
   - component: {fileID: 2179788184599025939}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2916,7 +2915,7 @@ GameObject:
   - component: {fileID: 7914407113300551457}
   m_Layer: 0
   m_Name: Cylinder.003
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3080,7 +3079,7 @@ GameObject:
   - component: {fileID: 7860661997007661707}
   m_Layer: 0
   m_Name: Tooth
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3162,7 +3161,7 @@ GameObject:
   - component: {fileID: 8611557944336462687}
   m_Layer: 0
   m_Name: Mouth
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3491,7 +3490,7 @@ GameObject:
   - component: {fileID: 5875368303917801005}
   m_Layer: 0
   m_Name: Cylinder.004
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3653,7 +3652,7 @@ GameObject:
   - component: {fileID: 7744779576923563192}
   m_Layer: 0
   m_Name: Whisker Parent.001
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

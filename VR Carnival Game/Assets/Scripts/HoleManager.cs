@@ -24,7 +24,7 @@ public class HoleManager : MonoBehaviour
 
         foreach (GameObject obj in gVar.holes)
         {
-            Debug.Log(obj.name);
+            //Debug.Log(obj.name);
         }
 
         int noOfMolesToSpawn = Random.Range(1,3);
@@ -35,7 +35,7 @@ public class HoleManager : MonoBehaviour
             if (gVar.holes.Count > 0)
             {
                 int holeIndex = Random.Range(0, gVar.holes.Count);
-                Debug.Log(gVar.holes.Count + " " + holeIndex);
+                //Debug.Log(gVar.holes.Count + " " + holeIndex);
                 if (holeIndex != prevHoleIndex)
                 {
                     gVar.holes[holeIndex].SendMessage("SpawnMole");

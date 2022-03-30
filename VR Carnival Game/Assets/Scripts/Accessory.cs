@@ -8,7 +8,7 @@ public class Accessory : MonoBehaviour
 
     private void ColourPicker(Material colouredMat)
     {
-        Debug.Log("Colour Picker Being Called");
+        //Debug.Log("Colour Picker Being Called");
 
         if (ColourGetter(this.gameObject) == false)
         {
@@ -26,14 +26,14 @@ public class Accessory : MonoBehaviour
 
     private bool ColourGetter(GameObject go)
     {
-        Debug.Log("Colour Getter Being Called");
+        //Debug.Log("Colour Getter Being Called");
 
         return go.CompareTag("FixedMat");
     }
 
     private void ColourSetter(GameObject go, Material colouredMat)
     {
-        Debug.Log("Colour Setter Being Called");
+        //Debug.Log("Colour Setter Being Called");
 
         try
         {

@@ -49,9 +49,10 @@ public class FloatingObjectSpawner : MonoBehaviour
             randomZ = Random.Range(-13f, 13.1f);
         }
 
-        Debug.Log("Spawning an Object");
 
         GameObject prefab = GameObject.Instantiate(floatingObjects[randomIndex], new Vector3(randomX, randomY, randomZ), Quaternion.identity);
+
+        Debug.Log("Spawning an Object @ " + new Vector3(randomX, randomY, randomZ));
     }
 
     private IEnumerator DestroyObject(GameObject prefab)

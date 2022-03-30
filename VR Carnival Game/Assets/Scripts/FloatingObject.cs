@@ -8,26 +8,46 @@ public class FloatingObject : MonoBehaviour
 
     private Quaternion startingRotation;
 
+    private Vector3 targetPosition;
+
+    private Vector3 startingPosition;
+
     private Rigidbody rb;
 
-    private float timePerSlerp = 15f;
+    private GameObject innerSphere;
 
-    private float timeElapsed = 0f;
+    private float timePerSlerp = 10f;
+
+    private float timePerLerp = 30f;
+
+    private float slerpTimeElapsed = 0f;
+
+    private float lerpTimeElapsed = 0f;
 
     private float floatingSpeed = 10f;
 
-    private bool waited = false;
+    private int spawnArea = 12;
+
+    //private bool waited = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.AddRelativeForce(RandomForce());
+        //rb = GetComponent<Rigidbody>();
+        //rb.AddRelativeForce(RandomForce());
+
+        innerSphere = GameObject.FindGameObjectWithTag("InnerSphere");
+        //innerSphere = GameObject.Find("Inner Sphere");
+        Debug.Log(innerSphere);
 
         targetRotation = RandomRotation();
         startingRotation = transform.rotation;
 
-        StartCoroutine(Waited());
+        targetPosition = RandomPosition();
+        startingPosition = transform.position;
+
+
+        //StartCoroutine(Waited());
     }
 
     // Update is called once per frame
@@ -36,30 +56,42 @@ public class FloatingObject : MonoBehaviour
         if (transform.rotation == targetRotation)
         {
             targetRotation = RandomRotation();
-            timeElapsed = 0f;
+            slerpTimeElapsed = 0f;
             startingRotation = transform.rotation;
         }
         else
         {
-            transform.rotation = Quaternion.Slerp(startingRotation, targetRotation, timeElapsed / timePerSlerp);
+            transform.rotation = Quaternion.Slerp(startingRotation, targetRotation, slerpTimeElapsed / timePerSlerp);
         }
 
-        if (rb.velocity.magnitude <= 0.05f && waited)
+        if (transform.position == targetPosition)
         {
-            rb.AddRelativeForce(RandomForce());
-            waited = false;
-            StartCoroutine(Waited());
+            targetPosition = RandomPosition();
+            lerpTimeElapsed = 0f;
+            startingPosition = transform.position;
+        }
+        else
+        {
+            transform.position = Vector3.Lerp(startingPosition, targetPosition, lerpTimeElapsed / timePerLerp);
         }
 
-        timeElapsed += Time.deltaTime;
+        //if (rb.velocity.magnitude <= 0.05f && waited)
+        //{
+            //rb.AddRelativeForce(RandomForce());
+            //waited = false;
+            //StartCoroutine(Waited());
+        //}
+
+        slerpTimeElapsed += Time.deltaTime;
+        lerpTimeElapsed += Time.deltaTime;
     }
 
-    private IEnumerator Waited()
-    {
-        yield return new WaitForSeconds(2f);
+    //private IEnumerator Waited()
+    //{
+        //yield return new WaitForSeconds(2f);
 
-        waited = true;
-    }
+        //waited = true;
+    //}
 
     private Quaternion RandomRotation()
     {
@@ -70,18 +102,36 @@ public class FloatingObject : MonoBehaviour
         return Quaternion.Euler(randomX, randomY, randomZ);
     }
 
-    private Vector3 RandomForce()
-    {
-        float randomX = Random.Range(-10f, 10.1f);
-        float randomY = Random.Range(-10f, 10.1f);
-        float randomZ = Random.Range(-10f, 10.1f);
+    //private Vector3 RandomForce()
+    //{
+        //float randomX = Random.Range(-10f, 10.1f);
+        //float randomY = Random.Range(-10f, 10.1f);
+        //float randomZ = Random.Range(-10f, 10.1f);
 
-        return new Vector3(randomX, randomY, randomZ) * floatingSpeed;
+        //return new Vector3(randomX, randomY, randomZ) * floatingSpeed;
+    //}
+
+    private Vector3 RandomPosition()
+    {
+        float randomX = Random.Range(-spawnArea, spawnArea + 0.1f);
+        float randomY = Random.Range(-spawnArea, spawnArea + 0.1f);
+        float randomZ = Random.Range(-spawnArea, spawnArea + 0.1f);
+        Vector3 randomVector3 = new Vector3(randomX, randomY, randomZ);
+
+        while (innerSphere.GetComponent<SphereCollider>().bounds.Contains(randomVector3))
+        {
+            randomX = Random.Range(-spawnArea, spawnArea + 0.1f);
+            randomY = Random.Range(-spawnArea, spawnArea + 0.1f);
+            randomZ = Random.Range(-spawnArea, spawnArea + 0.1f);
+            randomVector3 = new Vector3(randomX, randomY, randomZ);
+        }
+
+        return randomVector3;
     }
 
     void OnCollisionEnter(Collision other)
     {
-        rb.velocity = rb.velocity * 1.1f;
-        rb.AddRelativeForce(RandomForce());
+        //rb.velocity = rb.velocity * 1.1f;
+        //rb.AddRelativeForce(RandomForce());
     }
 }

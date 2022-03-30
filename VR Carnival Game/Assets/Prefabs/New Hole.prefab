@@ -265,6 +265,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7947365042294885546, guid: 1913152f67f5a1e4686133d74787a67f, type: 3}
+      propertyPath: m_TagString
+      value: Mole
+      objectReference: {fileID: 0}
     - target: {fileID: 7947365042294885548, guid: 1913152f67f5a1e4686133d74787a67f, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -335,6 +339,10 @@ PrefabInstance:
     - target: {fileID: 6264032031580422586, guid: 91e8664a37c18404499b788b95642c15, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6264032031580422586, guid: 91e8664a37c18404499b788b95642c15, type: 3}
+      propertyPath: m_TagString
+      value: Mole
       objectReference: {fileID: 0}
     - target: {fileID: 6747974839852948224, guid: 91e8664a37c18404499b788b95642c15, type: 3}
       propertyPath: m_RootOrder

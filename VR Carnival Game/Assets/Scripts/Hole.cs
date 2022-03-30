@@ -27,6 +27,16 @@ public class Hole : MonoBehaviour
         gVar.holes.Add(this.gameObject);
     }
 
+    void OnEnable()
+    {
+        AnimateIn();
+    }
+
+    void OnDisable()
+    {
+        AnimateOut();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -42,6 +52,20 @@ public class Hole : MonoBehaviour
             transform.localPosition = startPos;
         }
     }
+
+    private void AnimateIn()
+    {
+        transform.localScale = Vector3.zero;
+        LeanTween.cancel(this.gameObject);
+        LeanTween.scale(this.gameObject, new Vector3(0.8f, 0.8f, 0.8f), 1f);
+    }
+
+    private void AnimateOut()
+    {
+        LeanTween.cancel(this.gameObject);
+        LeanTween.scale(this.gameObject, Vector3.zero, 1f);
+    }
+
 
     public void SpawnMole()
     {
