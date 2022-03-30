@@ -8,6 +8,9 @@ public class gVar
     public static int currentCombo;
     public static float timePerLevel = 60f;
     public static int score;
+    public static int molesHitCorrectly;
+    public static int molesHitIncorrectly;
+    public static int molesMissed;
     public static float bpm;
     public static float spawnWaitTime;
 }

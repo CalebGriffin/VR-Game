@@ -130,6 +130,7 @@ public class Hole : MonoBehaviour
         try
         {
             mole.SendMessage("Despawn");
+            gVar.molesMissed++;
         }
         catch (MissingReferenceException)
         {

@@ -9,7 +9,7 @@ public class HoleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnMoles());
+        StartCoroutine(WaitToSpawnMoles());
     }
 
     // Update is called once per frame
@@ -18,14 +18,20 @@ public class HoleManager : MonoBehaviour
         
     }
 
+    private IEnumerator WaitToSpawnMoles()
+    {
+        yield return new WaitForSeconds(3f);
+        StartCoroutine(SpawnMoles());
+    }
+
     public IEnumerator SpawnMoles()
     {
         yield return new WaitForSeconds(0.5f);
 
-        foreach (GameObject obj in gVar.holes)
-        {
+        //foreach (GameObject obj in gVar.holes)
+        //{
             //Debug.Log(obj.name);
-        }
+        //}
 
         int noOfMolesToSpawn = Random.Range(1,3);
         

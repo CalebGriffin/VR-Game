@@ -6,6 +6,8 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
+    [SerializeField] private GameOver gameOver;
+
     private float timeRemaining;
 
     [SerializeField] private TextMeshProUGUI timerText;
@@ -25,7 +27,8 @@ public class Timer : MonoBehaviour
 
         if (timeRemaining <= 0f)
         {
-            // Call the GameOver method on the Game Manager Script
+            // Call the GameOver method on the GameOver script
+            gameOver.LevelEnded();
         }
     }
 

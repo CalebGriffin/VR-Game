@@ -47,6 +47,7 @@ public class Mole : MonoBehaviour
     {
         transform.parent.gameObject.SendMessage("MoleKilled");
         gVar.score = (int)Mathf.Clamp(gVar.score + (100 * gVar.currentCombo), 0, Mathf.Infinity);
+        gVar.molesHitCorrectly++;
         ComboBar.Instance.ScoreTextUpdate();
         ComboBar.Instance.IncreaseCombo();
         this.gameObject.SetActive(false);
@@ -55,6 +56,7 @@ public class Mole : MonoBehaviour
     protected void IncorrectHit()
     {
         gVar.score = (int)Mathf.Clamp(gVar.score - 100, 0, Mathf.Infinity);
+        gVar.molesHitIncorrectly++;
         ComboBar.Instance.ScoreTextUpdate();
         ComboBar.Instance.ResetCombo();
         Despawn();
