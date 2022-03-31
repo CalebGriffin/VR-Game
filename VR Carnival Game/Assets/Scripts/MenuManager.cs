@@ -33,6 +33,7 @@ public class MenuManager : MonoBehaviour
 
     public void TransitionScene(string name)
     {
+        Debug.Log("Transitioning to Scene: " + name);
         StartCoroutine("TransitionSceneDelay", name);
     }
 
@@ -98,6 +99,7 @@ public class MenuManager : MonoBehaviour
         optionsCanvas.SetActive(false);
         helpCanvas.SetActive(false);
         gameCanvas.SetActive(false);
+        gameOverCanvas.SetActive(false);
     }
 
     private void HideAllHoles()
@@ -106,6 +108,7 @@ public class MenuManager : MonoBehaviour
         optionsHoles.BroadcastMessage("AnimateOut");
         helpHoles.BroadcastMessage("AnimateOut");
         gameHoles.BroadcastMessage("AnimateOut");
+        gameOverHoles.BroadcastMessage("AnimateOut");
     }
 
     private void ShowNext(GameObject nextCanvas, GameObject nextHoles)

@@ -43,7 +43,7 @@ public class FloatingObject : MonoBehaviour
         targetRotation = RandomRotation();
         startingRotation = transform.rotation;
 
-        targetPosition = RandomPosition();
+        targetPosition = RandomPosition2();
         startingPosition = transform.position;
 
 
@@ -66,7 +66,7 @@ public class FloatingObject : MonoBehaviour
 
         if (transform.position == targetPosition)
         {
-            targetPosition = RandomPosition();
+            targetPosition = RandomPosition2();
             lerpTimeElapsed = 0f;
             startingPosition = transform.position;
         }
@@ -127,6 +127,17 @@ public class FloatingObject : MonoBehaviour
         }
 
         return randomVector3;
+    }
+
+    private Vector3 RandomPosition2()
+    {
+        Vector3 returnValue = Random.onUnitSphere * 15f;
+        RaycastHit hit;
+        while (Physics.Raycast(transform.position, returnValue - transform.position, out hit) && hit.collider.gameObject.CompareTag("InnerSphere"))
+        {
+            returnValue = Random.onUnitSphere * 15f;
+        }
+        return returnValue;
     }
 
     void OnCollisionEnter(Collision other)

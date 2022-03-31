@@ -67,6 +67,7 @@ public class UIHole : MonoBehaviour
 
     public void MoleKilled()
     {
+        Debug.Log(this.gameObject.name + "'s action is being invoked");
         action.Invoke();
     }
 }

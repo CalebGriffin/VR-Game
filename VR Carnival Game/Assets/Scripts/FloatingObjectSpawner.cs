@@ -50,9 +50,14 @@ public class FloatingObjectSpawner : MonoBehaviour
         }
 
 
-        GameObject prefab = GameObject.Instantiate(floatingObjects[randomIndex], new Vector3(randomX, randomY, randomZ), Quaternion.identity);
+        GameObject prefab = GameObject.Instantiate(floatingObjects[randomIndex], RandomPosition(), Quaternion.identity);
 
-        Debug.Log("Spawning an Object @ " + new Vector3(randomX, randomY, randomZ));
+        //Debug.Log("Spawning an Object @ " + new Vector3(randomX, randomY, randomZ));
+    }
+
+    private Vector3 RandomPosition()
+    {
+        return Random.onUnitSphere * 15f;
     }
 
     private IEnumerator DestroyObject(GameObject prefab)

@@ -57,8 +57,10 @@ public class GameOver : MonoBehaviour
 
     private float CalculateStarValue()
     {
-        float temp = gVar.score / 20000f;
-        return Mathf.Round(temp * 10f) / 0.1f;
+        float temp = gVar.score / 30000f;
+        float returnValue = Mathf.Round(temp * 10f) / 10f;
+        Debug.Log("Star Value is: " + returnValue.ToString());
+        return returnValue;
     }
 
     private string CalculateRank()
@@ -93,8 +95,9 @@ public class GameOver : MonoBehaviour
 
     private IEnumerator StarAnimation()
     {
+        starImage.fillAmount = 0f;
         yield return new WaitForSeconds(3f);
-        LeanTween.value(gameObject, 0, starValue, 5)
-        .setOnUpdate( (value) => { starImage.fillAmount = value; });
+        LeanTween.value(gameObject, 0, starValue, 5 * starValue)
+        .setOnUpdate( (float value) => { starImage.fillAmount = value; });
     }
 }

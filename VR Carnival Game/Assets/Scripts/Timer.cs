@@ -11,12 +11,21 @@ public class Timer : MonoBehaviour
     private float timeRemaining;
 
     [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private Slider timerSlider;
 
-    // Start is called before the first frame update
-    void Start()
+    private bool calledLevelEnd = false;
+
+    void OnEnable()
     {
         timeRemaining = gVar.timePerLevel;
+        calledLevelEnd = false;
+    }
+
+    void OnDisable()
+    {
+        timeRemaining = gVar.timePerLevel;
+        calledLevelEnd = false;
     }
 
     // Update is called once per frame
@@ -25,10 +34,12 @@ public class Timer : MonoBehaviour
         timeRemaining -= Time.deltaTime;
         UIUpdate();
 
-        if (timeRemaining <= 0f)
+        if (timeRemaining <= 0f && !calledLevelEnd)
         {
             // Call the GameOver method on the GameOver script
             gameOver.LevelEnded();
+
+            calledLevelEnd = true;
         }
     }
 
@@ -37,5 +48,6 @@ public class Timer : MonoBehaviour
         int timeRemainingInt = Mathf.CeilToInt(timeRemaining);
         timerText.text = timeRemainingInt.ToString();
         timerSlider.value = timeRemaining;
+        scoreText.text = gVar.score.ToString();
     }
 }

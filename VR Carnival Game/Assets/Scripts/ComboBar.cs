@@ -25,8 +25,6 @@ public class ComboBar : MonoBehaviour
     [SerializeField] private TextMeshProUGUI comboBarText;
     [SerializeField] private Slider comboBarSlider;
 
-    [SerializeField] private TextMeshProUGUI scoreText;
-
     void Awake()
     {
         if (instance != null && instance != this)
@@ -78,10 +76,5 @@ public class ComboBar : MonoBehaviour
     public void ResetCombo()
     {
         value = 0;
-    }
-
-    public void ScoreTextUpdate()
-    {
-        scoreText.text = gVar.score.ToString();
     }
 }

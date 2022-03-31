@@ -20,6 +20,7 @@ public class UIBlueMole : UIMole
             // Vibrate the Controller
             SteamVR_Actions.default_Haptic[SteamVR_Input_Sources.RightHand].Execute(0, 0.15f, 300, 1);
 
+            Debug.Log("Correct Hit called by: " + this.gameObject.name);
             base.CorrectHit();
         }
         else if (hammerName == "Red Hammer")

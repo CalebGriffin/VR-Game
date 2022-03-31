@@ -29,12 +29,17 @@ public class Hole : MonoBehaviour
 
     void OnEnable()
     {
+        holeAnimating = false;
+        hasMole = false;
+        canSpawnMole = true;
+        gVar.holes.Add(this.gameObject);
         AnimateIn();
     }
 
     void OnDisable()
     {
-        AnimateOut();
+        gVar.holes.Remove(this.gameObject);
+        transform.parent.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -60,10 +65,24 @@ public class Hole : MonoBehaviour
         LeanTween.scale(this.gameObject, new Vector3(0.8f, 0.8f, 0.8f), 1f);
     }
 
+    void DisableHole()
+    {
+        this.gameObject.SetActive(false);
+    }
+
     private void AnimateOut()
     {
+        DestroyMoles();
         LeanTween.cancel(this.gameObject);
-        LeanTween.scale(this.gameObject, Vector3.zero, 1f);
+        LeanTween.scale(this.gameObject, Vector3.zero, 1f).setOnComplete(DisableHole);
+    }
+
+    private void DestroyMoles()
+    {
+        foreach(GameObject mole in moles)
+        {
+            mole.SetActive(false);
+        }
     }
 
 
