@@ -46,6 +46,8 @@ public class FloatingObject : MonoBehaviour
         targetPosition = RandomPosition2();
         startingPosition = transform.position;
 
+        StartCoroutine(PlaySound());
+
 
         //StartCoroutine(Waited());
     }
@@ -138,6 +140,14 @@ public class FloatingObject : MonoBehaviour
             returnValue = Random.onUnitSphere * 15f;
         }
         return returnValue;
+    }
+
+    private IEnumerator PlaySound()
+    {
+        float randomTime = Random.Range(10f, 30f);
+        yield return new WaitForSeconds(randomTime);
+        this.gameObject.GetComponent<AudioSource>().Play();
+        StartCoroutine(PlaySound());
     }
 
     void OnCollisionEnter(Collision other)
