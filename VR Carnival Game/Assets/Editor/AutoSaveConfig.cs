@@ -1,3 +1,5 @@
+// Script created by Matthew J Spencer - https://github.com/Matthew-J-Spencer/Unity-AutoSave
+
 using UnityEngine;
 
 namespace Tarodev {

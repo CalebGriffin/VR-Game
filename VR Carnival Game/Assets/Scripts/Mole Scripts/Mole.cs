@@ -5,34 +5,23 @@ using Valve.VR.InteractionSystem;
 
 public class Mole : MonoBehaviour
 {
+    // GameObject arrays to store all of the items of clothing
     [SerializeField] protected GameObject[] hats;
     [SerializeField] protected GameObject[] glasses;
     [SerializeField] protected GameObject[] neckAccessories;
     [SerializeField] protected GameObject[] moustaches;
 
+    // GameObject so that the moles can face towards the player when they spawn
     [SerializeField] private GameObject playerHead;
 
-    //[SerializeField] protected GameObject deathParticles;
-
-    // Start is called before the first frame update
-    virtual public void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    virtual public void Update()
-    {
-        
-    }
-
+    // When this script is enabled, get a reference to the players head and call the method to look towards the player
     virtual public void OnEnable()
     {
         playerHead = GameObject.FindGameObjectWithTag("PlayerHead");
         FaceThePlayer();
-        //DeathParticles();
     }
 
+    // When this script is disabled, call the method to disable all of the items of clothing
     virtual public void OnDisable()
     {
         GetUndressed();
@@ -43,35 +32,49 @@ public class Mole : MonoBehaviour
         // This will be overridden by the inherited classes
     }
 
+    // This method will be called when the correct hammer hits this mole
     protected void CorrectHit()
     {
+        // Send a message to the hole object to say that the mole has been hit
         transform.parent.gameObject.SendMessage("MoleKilled");
+
+        // Update the global score variable
         gVar.score = (int)Mathf.Clamp(gVar.score + (100 * gVar.currentCombo), 0, Mathf.Infinity);
+        
+        // Increase the global variable that tracks how many moles have been hit correctly
         gVar.molesHitCorrectly++;
+
+        // Call the method to increase the Combo bar
         ComboBar.Instance.IncreaseCombo();
+
+        // Set this GameObject to inactive to hide the mole
         this.gameObject.SetActive(false);
     }
 
+    // This method will be called when the incorrect hammer hits this mole
     protected void IncorrectHit()
     {
+        // Update the global score variable
         gVar.score = (int)Mathf.Clamp(gVar.score - 100, 0, Mathf.Infinity);
+
+        // Increase the global variable that tracks how many moles have been hit incorrectly
         gVar.molesHitIncorrectly++;
+
+        // Call the method to increase the Combo bar
         ComboBar.Instance.ResetCombo();
+
+        // Call the despawn method to disable the mole
         Despawn();
     }
 
+    // Send a message to the hole object to say that the mole has been hit and then disable this mole
     virtual public void Despawn()
     {
         transform.parent.gameObject.SendMessage("MoleKilled");
         this.gameObject.SetActive(false);
     }
 
-    //virtual public void DeathParticles()
-    //{
-        //GameObject prefab = GameObject.Instantiate(deathParticles, transform.position, Quaternion.identity);
-        //prefab.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
-    //}
-
+    // Randomly choose from all the items of clothing and enable them
     virtual public void GetDressed(Material colouredMat)
     {
         ItemPicker(hats, true, colouredMat);
@@ -80,6 +83,7 @@ public class Mole : MonoBehaviour
         ItemPicker(moustaches, false, colouredMat);
     }
 
+    // Disable all of the items of clothing
     virtual public void GetUndressed()
     {
         ItemHider(hats);
@@ -88,6 +92,7 @@ public class Mole : MonoBehaviour
         ItemHider(moustaches);
     }
 
+    // Takes a parameter of a GameObject array and disables all of the objects in that array
     virtual protected void ItemHider(GameObject[] accessoryArray)
     {
         foreach (GameObject go in accessoryArray)
@@ -96,6 +101,8 @@ public class Mole : MonoBehaviour
         }
     }
 
+    // Randomly picks from the GameObject array parameter and enables one of the items of clothing and sets it to the correct colour
+    // If the GameObject array is hats then one of the objects must be chosen otherwise, there is a possibility that none of the items will be chosen
     virtual protected void ItemPicker(GameObject[] accessoryArray, bool isHats, Material colouredMat)
     {
         int randomIndex = -1;
@@ -116,6 +123,7 @@ public class Mole : MonoBehaviour
         }
     }
 
+    // Gets the position of the player's head and then rotates to face them only on the y-axis
     private void FaceThePlayer()
     {
         Vector3 lookPos = playerHead.transform.position - transform.position;
