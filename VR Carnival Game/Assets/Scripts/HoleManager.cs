@@ -30,11 +30,6 @@ public class HoleManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        //foreach (GameObject obj in gVar.holes)
-        //{
-            //Debug.Log(obj.name);
-        //}
-
         // Generates a random number between 1 and 3
         int noOfMolesToSpawn = Random.Range(1,3);
         
@@ -47,8 +42,6 @@ public class HoleManager : MonoBehaviour
             if (gVar.holes.Count > 0)
             {
                 int holeIndex = Random.Range(0, gVar.holes.Count);
-
-                //Debug.Log(gVar.holes.Count + " " + holeIndex);
 
                 if (holeIndex != prevHoleIndex)
                 {

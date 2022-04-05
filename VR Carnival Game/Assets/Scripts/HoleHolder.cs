@@ -2,22 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// This class is used to adjust the scale of the HoleHolder object so that the moles can be placed in the correct positions
 public class HoleHolder : MonoBehaviour
 {
-    [SerializeField] private GameObject table;
+    [SerializeField] private GameObject table; // The table object
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // When the Gizmos are drawn, set the scale of this object to the inverse of the table's scale
     void OnDrawGizmos()
     {
         float newX = 1f / table.transform.localScale.x;

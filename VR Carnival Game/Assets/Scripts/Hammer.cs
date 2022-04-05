@@ -4,18 +4,7 @@ using UnityEngine;
 
 public class Hammer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // When the Hammer collides with a Mole, call the Hit method on the Mole object and pass in this object's name
     void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.CompareTag("Mole"))

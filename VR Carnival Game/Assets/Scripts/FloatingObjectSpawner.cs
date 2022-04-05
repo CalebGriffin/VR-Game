@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class FloatingObjectSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] floatingObjects;
+    [SerializeField] private GameObject[] floatingObjects; // Array of GameObjects to be spawned
 
-    [SerializeField] private GameObject innerSphere;
+    [SerializeField] private GameObject innerSphere; // The collider where the GameObjects shouldn't be spawned
 
     // Start is called before the first frame update
     void Start()
     {
+        // Choose a random number of GameObjects to be spawned and spawn them
         int randomAmount = Random.Range(10, 20);
         for (int i = 0; i < randomAmount; i++)
         {
@@ -18,53 +19,20 @@ public class FloatingObjectSpawner : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    private IEnumerator DelayedSpawn()
-    {
-        Debug.Log("Delayed Spawn Started");
-
-        yield return new WaitForSeconds(30f);
-
-        Debug.Log("Delayed Spawn Waited");
-
-        SpawnObject();
-
-        StartCoroutine(DelayedSpawn());
-    }
-
+    // Spawn a floating object at a random position that isn't inside the innerSphere
     private void SpawnObject()
     {
         int randomIndex = Random.Range(0, floatingObjects.Length);
-        float randomX = Random.Range(-13f, 13.1f);
-        float randomY = Random.Range(-13f, 13.1f);
-        float randomZ = Random.Range(-13f, 13.1f);
-        while (innerSphere.GetComponent<SphereCollider>().bounds.Contains(new Vector3(randomX, randomY, randomZ)))
-        {
-            randomX = Random.Range(-13f, 13.1f);
-            randomY = Random.Range(-13f, 13.1f);
-            randomZ = Random.Range(-13f, 13.1f);
-        }
-
 
         GameObject prefab = GameObject.Instantiate(floatingObjects[randomIndex], RandomPosition(), Quaternion.identity);
 
+        // Debug.Log for testing
         //Debug.Log("Spawning an Object @ " + new Vector3(randomX, randomY, randomZ));
     }
 
+    // Return a random position that is on the surface of a sphere
     private Vector3 RandomPosition()
     {
         return Random.onUnitSphere * 15f;
-    }
-
-    private IEnumerator DestroyObject(GameObject prefab)
-    {
-        yield return new WaitForSeconds(30f);
-
-        Destroy(prefab);
-        SpawnObject();
     }
 }

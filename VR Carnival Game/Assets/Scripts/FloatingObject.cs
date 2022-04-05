@@ -4,97 +4,76 @@ using UnityEngine;
 
 public class FloatingObject : MonoBehaviour
 {
+    // Variables for the start and end rotation of the object
     private Quaternion targetRotation;
-
     private Quaternion startingRotation;
 
+    // Variables for the start and end position of the object
     private Vector3 targetPosition;
-
     private Vector3 startingPosition;
 
-    private Rigidbody rb;
+    private float timePerSlerp = 10f; // Amount of time that it takes to rotate the object
 
-    private GameObject innerSphere;
+    private float timePerLerp = 30f; // Amount of time that it takes to move the object
 
-    private float timePerSlerp = 10f;
+    private float slerpTimeElapsed = 0f; // Amount of time since the object started rotating
 
-    private float timePerLerp = 30f;
+    private float lerpTimeElapsed = 0f; // Amount of time since the object started moving
 
-    private float slerpTimeElapsed = 0f;
+    private float floatingSpeed = 10f; // The speed at which the object moves
 
-    private float lerpTimeElapsed = 0f;
-
-    private float floatingSpeed = 10f;
-
-    private int spawnArea = 12;
-
-    //private bool waited = false;
+    private int spawnArea = 12; // The size of the area in which the object can spawn
 
     // Start is called before the first frame update
     void Start()
     {
-        //rb = GetComponent<Rigidbody>();
-        //rb.AddRelativeForce(RandomForce());
-
-        innerSphere = GameObject.FindGameObjectWithTag("InnerSphere");
-        //innerSphere = GameObject.Find("Inner Sphere");
-        Debug.Log(innerSphere);
-
+        // Set the target rotation to a random rotation and set the starting rotation to the current rotation
         targetRotation = RandomRotation();
         startingRotation = transform.rotation;
 
-        targetPosition = RandomPosition2();
+        // Set the target position to a random position and set the starting position to the current position
+        targetPosition = RandomPosition();
         startingPosition = transform.position;
 
+        // Start the coroutine to play the sound represented by the animal
         StartCoroutine(PlaySound());
-
-
-        //StartCoroutine(Waited());
     }
 
     // Update is called once per frame
     void Update()
     {
+        // If it has reached the target rotation, set the target rotation to a random rotation and reset the slerp time elapsed
         if (transform.rotation == targetRotation)
         {
             targetRotation = RandomRotation();
             slerpTimeElapsed = 0f;
             startingRotation = transform.rotation;
         }
+        // Else, rotate the object towards the target rotation
         else
         {
             transform.rotation = Quaternion.Slerp(startingRotation, targetRotation, slerpTimeElapsed / timePerSlerp);
         }
 
+        // If it has reached the target position, set the target position to a random position and reset the lerp time elapsed
         if (transform.position == targetPosition)
         {
-            targetPosition = RandomPosition2();
+            targetPosition = RandomPosition();
             lerpTimeElapsed = 0f;
             startingPosition = transform.position;
         }
+        // Else, move the object towards the target position
         else
         {
             transform.position = Vector3.Lerp(startingPosition, targetPosition, lerpTimeElapsed / timePerLerp);
         }
 
-        //if (rb.velocity.magnitude <= 0.05f && waited)
-        //{
-            //rb.AddRelativeForce(RandomForce());
-            //waited = false;
-            //StartCoroutine(Waited());
-        //}
-
+        // Increase the slerp time elapsed and the lerp time elapsed by the amount of time that has passed since the last frame
         slerpTimeElapsed += Time.deltaTime;
         lerpTimeElapsed += Time.deltaTime;
     }
 
-    //private IEnumerator Waited()
-    //{
-        //yield return new WaitForSeconds(2f);
-
-        //waited = true;
-    //}
-
+    // Returns a random rotation
     private Quaternion RandomRotation()
     {
         float randomX = Random.Range(-360f, 360.1f);
@@ -104,34 +83,8 @@ public class FloatingObject : MonoBehaviour
         return Quaternion.Euler(randomX, randomY, randomZ);
     }
 
-    //private Vector3 RandomForce()
-    //{
-        //float randomX = Random.Range(-10f, 10.1f);
-        //float randomY = Random.Range(-10f, 10.1f);
-        //float randomZ = Random.Range(-10f, 10.1f);
-
-        //return new Vector3(randomX, randomY, randomZ) * floatingSpeed;
-    //}
-
+    // Returns a random position
     private Vector3 RandomPosition()
-    {
-        float randomX = Random.Range(-spawnArea, spawnArea + 0.1f);
-        float randomY = Random.Range(-spawnArea, spawnArea + 0.1f);
-        float randomZ = Random.Range(-spawnArea, spawnArea + 0.1f);
-        Vector3 randomVector3 = new Vector3(randomX, randomY, randomZ);
-
-        while (innerSphere.GetComponent<SphereCollider>().bounds.Contains(randomVector3))
-        {
-            randomX = Random.Range(-spawnArea, spawnArea + 0.1f);
-            randomY = Random.Range(-spawnArea, spawnArea + 0.1f);
-            randomZ = Random.Range(-spawnArea, spawnArea + 0.1f);
-            randomVector3 = new Vector3(randomX, randomY, randomZ);
-        }
-
-        return randomVector3;
-    }
-
-    private Vector3 RandomPosition2()
     {
         Vector3 returnValue = Random.onUnitSphere * 15f;
         RaycastHit hit;
@@ -142,17 +95,12 @@ public class FloatingObject : MonoBehaviour
         return returnValue;
     }
 
+    // Waits for a random amount of time and then plays the sound represented by the animal, then calls itself continuously
     private IEnumerator PlaySound()
     {
         float randomTime = Random.Range(10f, 30f);
         yield return new WaitForSeconds(randomTime);
         this.gameObject.GetComponent<AudioSource>().Play();
         StartCoroutine(PlaySound());
-    }
-
-    void OnCollisionEnter(Collision other)
-    {
-        //rb.velocity = rb.velocity * 1.1f;
-        //rb.AddRelativeForce(RandomForce());
     }
 }
