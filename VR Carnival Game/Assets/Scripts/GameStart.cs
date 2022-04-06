@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GameStart : MonoBehaviour
 {
-    // Copy all comments from GameReset.cs to this file
-
     [SerializeField] private GameObject gameManager; // Used to enable the Timer and HoleManager scripts
     [SerializeField] private GameObject menuMusicSource; // Used to stop and start the menu music
     [SerializeField] private GameObject gameMusicSource; // Used to stop and start the game music

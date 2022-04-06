@@ -19,7 +19,6 @@ public class GameOver : MonoBehaviour
     [SerializeField] private Image starImage;
 
     private float starValue = 0f; // The value of the starImage
-    private int animationID = 1; // UNUSED
 
     // Sets up all of the GameOver UI and then calls the MenuManager to show the GameOver screen
     public void LevelEnded()
